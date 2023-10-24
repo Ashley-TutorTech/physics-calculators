@@ -306,7 +306,106 @@
         window.parent.postMessage({height: document.documentElement.scrollHeight || document.body.scrollHeight},"*");
     });
 </script>
+<head>
+		<script type="text/javascript">
+    window.addEventListener(
+        'error',
+        function(event) {
+            var message = JSON.parse(JSON.stringify(event.message));
+            var source = event.filename;
+            var lineno = event.lineno;
+            var colno = event.colno;
+            var error = event.error;
+            
+            window.parent.postMessage({
+                type: 'iframeError',
+                details: {
+                    message: message,
+                    source: source,
+                    lineno: lineno,
+                    colno: colno,
+                    error: error ? error.stack : ''
+                }
+            }, '*');
+        }
+    );
 
+    // Continue to catch unhandled promise rejections as before
+    window.addEventListener('unhandledrejection', function(event) {
+        window.parent.postMessage({
+            type: 'iframePromiseRejection',
+            details: {
+                reason: event.reason
+            }
+        }, '*');
+    });
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Friction Coefficient Calculator</title>
+
+	<link rel="canonical" href="https://calculator.tools/prompt/8306/">
+	<meta charset="utf-8">
+</head>
+<body>
+    <h2>Static Friction Coefficient Calculator</h2>
+    <p><strong>Equation:</strong> μs = tan(θ)</p>
+    <label for="theta">Angle θ (degrees):</label>
+    <input type="number" id="theta" placeholder="Enter angle θ">
+    <br>
+    <button onclick="calculateStaticFrictionCoefficient()">Calculate</button>
+    <p id="result"></p>
+    <script>
+        function calculateStaticFrictionCoefficient() {
+            const theta = parseFloat(document.getElementById('theta').value) * (Math.PI / 180);
+            const mu_s = Math.tan(theta);
+            document.getElementById('result').innerText = 'Static Friction Coefficient (μs): ' + mu_s.toFixed(4);
+        }
+    </script>
+        <!-- Built-In Functions for Apps -->
+        <script type="text/javascript">
+            var localStoragePrefix = "ct-{{ cachebreaker }}";
+            var lastSave = 0;
+            // save to localstorage
+            function saveLocal(data) {
+                if (Date.now() - lastSave < 1000) {
+                    return;
+                }
+                // save to cookie
+                let cookie = localStoragePrefix + "=" + JSON.stringify(data) + "; path=" + window.location.pathname +  "'; SameSite=Strict";
+                cookie += "; expires=" + new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 1000).toUTCString();
+                document.cookie = cookie;
+                lastSave = Date.now();
+            }
+
+            // load from localstorage
+            function loadLocal() {
+                var cookiePrefix = localStoragePrefix + "=";
+                var cookieStart = document.cookie.indexOf(cookiePrefix);
+                if (cookieStart > -1) {
+                    let cookieEnd = document.cookie.indexOf(";", cookieStart);
+                    if (cookieEnd == -1) {
+                        cookieEnd = document.cookie.length;
+                    }
+                    var cookieData = document.cookie.substring(cookieStart + cookiePrefix.length, cookieEnd);
+                    return JSON.parse(cookieData);
+                }
+            }
+        </script>
+
+<script type="text/javascript">
+    // auto-resize iframe
+    var observer = new MutationObserver(
+        function() {
+            window.parent.postMessage({height: document.documentElement.scrollHeight || document.body.scrollHeight},"*");
+        }
+    );
+    window.addEventListener('load', function() {
+        observer.observe(document.body, {attributes: true, childList: true, subtree: true});
+        window.parent.postMessage({height: document.documentElement.scrollHeight || document.body.scrollHeight},"*");
+    });
+</script>
 
 </body>
 </html>
