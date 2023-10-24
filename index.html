@@ -47,12 +47,13 @@
         }
     </style>
 
-	<link rel="canonical" href="https://calculator.tools/prompt/8302/">
+	<link rel="canonical" href="https://calculator.tools/prompt/8307/">
 	<meta charset="utf-8">
 </head>
 <body>
     <h1>Physics Calculators</h1>
 
+    <!-- Normal Force Calculator -->
     <div class="calculator">
         <h2>Normal Force Calculator</h2>
         <p><strong>Problem Summary:</strong> A block is acted upon by a gravitational force due to its mass and an external force F2 at an angle θ. Calculate the normal force acting on the block.</p>
@@ -79,6 +80,7 @@
         </script>
     </div>
 
+    <!-- Block Acceleration Calculator -->
     <div class="calculator">
         <h2>Block Acceleration Calculator</h2>
         <p><strong>Problem Summary:</strong> A block is acted upon by two forces, F1 and F2, with F2 at an angle θ to the horizontal. The block has mass m and moves on a surface with kinetic friction coefficient μk. Calculate its acceleration.</p>
@@ -110,259 +112,23 @@
             }
         </script>
     </div>
-        <!-- Built-In Functions for Apps -->
-        <script type="text/javascript">
-            var localStoragePrefix = "ct-{{ cachebreaker }}";
-            var lastSave = 0;
-            // save to localstorage
-            function saveLocal(data) {
-                if (Date.now() - lastSave < 1000) {
-                    return;
-                }
-                // save to cookie
-                let cookie = localStoragePrefix + "=" + JSON.stringify(data) + "; path=" + window.location.pathname +  "'; SameSite=Strict";
-                cookie += "; expires=" + new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 1000).toUTCString();
-                document.cookie = cookie;
-                lastSave = Date.now();
-            }
 
-            // load from localstorage
-            function loadLocal() {
-                var cookiePrefix = localStoragePrefix + "=";
-                var cookieStart = document.cookie.indexOf(cookiePrefix);
-                if (cookieStart > -1) {
-                    let cookieEnd = document.cookie.indexOf(";", cookieStart);
-                    if (cookieEnd == -1) {
-                        cookieEnd = document.cookie.length;
-                    }
-                    var cookieData = document.cookie.substring(cookieStart + cookiePrefix.length, cookieEnd);
-                    return JSON.parse(cookieData);
-                }
-            }
-        </script>
-
-<script type="text/javascript">
-    // auto-resize iframe
-    var observer = new MutationObserver(
-        function() {
-            window.parent.postMessage({height: document.documentElement.scrollHeight || document.body.scrollHeight},"*");
-        }
-    );
-    window.addEventListener('load', function() {
-        observer.observe(document.body, {attributes: true, childList: true, subtree: true});
-        window.parent.postMessage({height: document.documentElement.scrollHeight || document.body.scrollHeight},"*");
-    });
-</script>
-<head>
-		<script type="text/javascript">
-    window.addEventListener(
-        'error',
-        function(event) {
-            var message = JSON.parse(JSON.stringify(event.message));
-            var source = event.filename;
-            var lineno = event.lineno;
-            var colno = event.colno;
-            var error = event.error;
-            
-            window.parent.postMessage({
-                type: 'iframeError',
-                details: {
-                    message: message,
-                    source: source,
-                    lineno: lineno,
-                    colno: colno,
-                    error: error ? error.stack : ''
-                }
-            }, '*');
-        }
-    );
-
-    // Continue to catch unhandled promise rejections as before
-    window.addEventListener('unhandledrejection', function(event) {
-        window.parent.postMessage({
-            type: 'iframePromiseRejection',
-            details: {
-                reason: event.reason
-            }
-        }, '*');
-    });
-</script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics Calculators</title>
-    <style>
-        .calculator {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-    </style>
-
-	<link rel="canonical" href="https://calculator.tools/prompt/8302/">
-	<meta charset="utf-8">
-</head>
-<body>
-    <h1>Physics Calculators</h1>
-
+    <!-- Static Friction Coefficient Calculator -->
     <div class="calculator">
-        <h2>Normal Force Calculator</h2>
-        <p><strong>Problem Summary:</strong> A block is acted upon by a gravitational force due to its mass and an external force F2 at an angle θ. Calculate the normal force acting on the block.</p>
-        <p><strong>Equation:</strong> FN = mg + F2 sin(θ)</p>
-        <label for="m">Mass (m) in kg:</label>
-        <input type="number" id="m" placeholder="Enter mass"><br>
-        <label for="g">Gravity (g) in m/s^2:</label>
-        <input type="number" id="g" placeholder="Enter gravity" value="9.81"><br>
-        <label for="F2">Force F2 (N):</label>
-        <input type="number" id="F2" placeholder="Enter force F2"><br>
-        <label for="theta">Angle θ (degrees):</label>
-        <input type="number" id="theta" placeholder="Enter angle"><br>
-        <button onclick="calculateNormalForce()">Calculate</button>
-        <p id="result"></p>
+        <h2>Static Friction Coefficient Calculator</h2>
+        <p><strong>Equation:</strong> μs = tan(θ)</p>
+        <label for="theta_static">Angle θ (degrees):</label>
+        <input type="number" id="theta_static" placeholder="Enter angle θ"><br>
+        <button onclick="calculateStaticFrictionCoefficient()">Calculate</button>
+        <p id="result_static"></p>
         <script>
-            function calculateNormalForce() {
-                const m = parseFloat(document.getElementById('m').value);
-                const g = parseFloat(document.getElementById('g').value);
-                const F2 = parseFloat(document.getElementById('F2').value);
-                const theta = parseFloat(document.getElementById('theta').value) * (Math.PI / 180);
-                const FN = m * g + F2 * Math.sin(theta);
-                document.getElementById('result').innerText = 'Normal Force: ' + FN.toFixed(2) + ' N';
+            function calculateStaticFrictionCoefficient() {
+                const theta = parseFloat(document.getElementById('theta_static').value) * (Math.PI / 180);
+                const mu_s = Math.tan(theta);
+                document.getElementById('result_static').innerText = 'Static Friction Coefficient (μs): ' + mu_s.toFixed(4);
             }
         </script>
     </div>
-
-    <div class="calculator">
-        <h2>Block Acceleration Calculator</h2>
-        <p><strong>Problem Summary:</strong> A block is acted upon by two forces, F1 and F2, with F2 at an angle θ to the horizontal. The block has mass m and moves on a surface with kinetic friction coefficient μk. Calculate its acceleration.</p>
-        <p><strong>Equation:</strong> a = (F1 - F2 cos(θ) - μk FN) / m</p>
-        <label for="F1_acc">Force F1 (N):</label>
-        <input type="number" id="F1_acc" placeholder="Enter F1"><br>
-        <label for="F2_acc">Force F2 (N):</label>
-        <input type="number" id="F2_acc" placeholder="Enter F2"><br>
-        <label for="m_acc">Mass (kg):</label>
-        <input type="number" id="m_acc" placeholder="Enter mass"><br>
-        <label for="mu_k_acc">Coefficient of Kinetic Friction:</label>
-        <input type="number" id="mu_k_acc" placeholder="Enter μk"><br>
-        <label for="FN_acc">Normal Force (N):</label>
-        <input type="number" id="FN_acc" placeholder="Enter FN"><br>
-        <label for="theta_acc">Angle θ (degrees):</label>
-        <input type="number" id="theta_acc" placeholder="Enter angle"><br>
-        <button onclick="calculateAccelerationAcc()">Calculate</button>
-        <p id="result_acc"></p>
-        <script>
-            function calculateAccelerationAcc() {
-                const F1 = parseFloat(document.getElementById('F1_acc').value);
-                const F2 = parseFloat(document.getElementById('F2_acc').value);
-                const m = parseFloat(document.getElementById('m_acc').value);
-                const mu_k = parseFloat(document.getElementById('mu_k_acc').value);
-                const FN = parseFloat(document.getElementById('FN_acc').value);
-                const theta = parseFloat(document.getElementById('theta_acc').value) * (Math.PI / 180);
-                const a = (F1 - F2 * Math.cos(theta) - mu_k * FN) / m;
-                document.getElementById('result_acc').innerText = 'Acceleration: ' + a.toFixed(4) + ' m/s^2';
-            }
-        </script>
-    </div>
-        <!-- Built-In Functions for Apps -->
-        <script type="text/javascript">
-            var localStoragePrefix = "ct-{{ cachebreaker }}";
-            var lastSave = 0;
-            // save to localstorage
-            function saveLocal(data) {
-                if (Date.now() - lastSave < 1000) {
-                    return;
-                }
-                // save to cookie
-                let cookie = localStoragePrefix + "=" + JSON.stringify(data) + "; path=" + window.location.pathname +  "'; SameSite=Strict";
-                cookie += "; expires=" + new Date(Date.now() + 1000 * 60 * 60 * 24 * 365 * 1000).toUTCString();
-                document.cookie = cookie;
-                lastSave = Date.now();
-            }
-
-            // load from localstorage
-            function loadLocal() {
-                var cookiePrefix = localStoragePrefix + "=";
-                var cookieStart = document.cookie.indexOf(cookiePrefix);
-                if (cookieStart > -1) {
-                    let cookieEnd = document.cookie.indexOf(";", cookieStart);
-                    if (cookieEnd == -1) {
-                        cookieEnd = document.cookie.length;
-                    }
-                    var cookieData = document.cookie.substring(cookieStart + cookiePrefix.length, cookieEnd);
-                    return JSON.parse(cookieData);
-                }
-            }
-        </script>
-
-<script type="text/javascript">
-    // auto-resize iframe
-    var observer = new MutationObserver(
-        function() {
-            window.parent.postMessage({height: document.documentElement.scrollHeight || document.body.scrollHeight},"*");
-        }
-    );
-    window.addEventListener('load', function() {
-        observer.observe(document.body, {attributes: true, childList: true, subtree: true});
-        window.parent.postMessage({height: document.documentElement.scrollHeight || document.body.scrollHeight},"*");
-    });
-</script>
-<head>
-		<script type="text/javascript">
-    window.addEventListener(
-        'error',
-        function(event) {
-            var message = JSON.parse(JSON.stringify(event.message));
-            var source = event.filename;
-            var lineno = event.lineno;
-            var colno = event.colno;
-            var error = event.error;
-            
-            window.parent.postMessage({
-                type: 'iframeError',
-                details: {
-                    message: message,
-                    source: source,
-                    lineno: lineno,
-                    colno: colno,
-                    error: error ? error.stack : ''
-                }
-            }, '*');
-        }
-    );
-
-    // Continue to catch unhandled promise rejections as before
-    window.addEventListener('unhandledrejection', function(event) {
-        window.parent.postMessage({
-            type: 'iframePromiseRejection',
-            details: {
-                reason: event.reason
-            }
-        }, '*');
-    });
-</script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static Friction Coefficient Calculator</title>
-
-	<link rel="canonical" href="https://calculator.tools/prompt/8306/">
-	<meta charset="utf-8">
-</head>
-<body>
-    <h2>Static Friction Coefficient Calculator</h2>
-    <p><strong>Equation:</strong> μs = tan(θ)</p>
-    <label for="theta">Angle θ (degrees):</label>
-    <input type="number" id="theta" placeholder="Enter angle θ">
-    <br>
-    <button onclick="calculateStaticFrictionCoefficient()">Calculate</button>
-    <p id="result"></p>
-    <script>
-        function calculateStaticFrictionCoefficient() {
-            const theta = parseFloat(document.getElementById('theta').value) * (Math.PI / 180);
-            const mu_s = Math.tan(theta);
-            document.getElementById('result').innerText = 'Static Friction Coefficient (μs): ' + mu_s.toFixed(4);
-        }
-    </script>
         <!-- Built-In Functions for Apps -->
         <script type="text/javascript">
             var localStoragePrefix = "ct-{{ cachebreaker }}";
